@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cálculo de Propinas</title>
+    <link rel="stylesheet" href="pro.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Cálculo de Propinas</h1>
+            <p>Distribución equitativa de propinas semanales para el personal</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="dashboard">Dashboard</div>
+            <div class="tab" data-tab="employees">Empleados</div>
+            <div class="tab" data-tab="tips">Registro de Propinas</div>
+            <div class="tab" data-tab="attendance">Asistencias</div>
+            <div class="tab" data-tab="calculation">Cálculo</div>
+        </div>
+        
+        <!-- Dashboard -->
+        <div class="tab-content active" id="dashboard">
+            <h2>Resumen Semanal</h2>
+            <div class="week-selector">
+                <label for="week-select">Seleccionar semana:</label>
+                <input type="week" id="week-select" value="2024-W01">
+                <button class="btn btn-primary" id="load-week">Cargar</button>
+            </div>
+            <div class="summary-cards">
+                <div class="summary-card"><h3>Total Propina Semanal</h3><p id="total-tips">$0.00</p></div>
+                <div class="summary-card"><h3>Empleados Activos</h3><p id="total-employees">0</p></div>
+                <div class="summary-card"><h3>Días a Distribuir</h3><p id="total-days">0</p></div>
+                <div class="summary-card"><h3>Valor por Día</h3><p id="value-per-day">$0.00</p></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Distribución de Propinas</h3></div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Días Trabajados</th>
+                                <th>Horas Extras</th>
+                                <th>Propina Base</th>
+                                <th>Propina Horas Extras</th>
+                                <th>Total a Pagar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="distribution-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empleados -->
+        <div class="tab-content" id="employees">
+            <h2>Gestión de Empleados</h2>
+            <div class="card">
+                <div class="card-header"><h3>Agregar Nuevo Empleado</h3></div>
+                <form id="employee-form">
+                    <div class="form-group"><label for="employee-name">Nombre completo</label><input type="text" id="employee-name" required></div>
+                    <div class="form-group"><label for="employee-position">Puesto</label><input type="text" id="employee-position" required></div>
+                    <div class="form-group">
+                        <label for="employee-status">Estado</label>
+                        <select id="employee-status" required>
+                            <option value="active">Activo</option>
+                            <option value="inactive">Inactivo</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Lista de Empleados</h3></div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>ID</th><th>Nombre</th><th>Puesto</th><th>Estado</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="employees-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Propinas -->
+        <div class="tab-content" id="tips">
+            <h2>Registro de Propinas Diarias</h2>
+            <div class="card">
+                <div class="card-header"><h3>Agregar Propinas</h3></div>
+                <form id="tips-form">
+                    <div class="form-group"><label for="tips-date">Fecha</label><input type="date" id="tips-date" required></div>
+                    <div class="form-group"><label for="tips-amount">Monto de Propinas</label><input type="number" id="tips-amount" step="0.01" min="0" required></div>
+                    <button type="submit" class="btn btn-primary">Registrar Propina</button>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Propinas de la Semana</h3></div>
+                <div class="table-responsive">
+                    <table>
+                        <thead><tr><th>Fecha</th><th>Día</th><th>Monto</th><th>Acciones</th></tr></thead>
+                        <tbody id="tips-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asistencias -->
+        <div class="tab-content" id="attendance">
+            <h2>Registro de Asistencias y Horas Extras</h2>
+            <div class="card">
+                <div class="card-header"><h3>Registrar Asistencia</h3></div>
+                <form id="attendance-form">
+                    <div class="form-group"><label for="attendance-date">Fecha</label><input type="date" id="attendance-date" required></div>
+                    <div class="form-group"><label for="attendance-employee">Empleado</label><select id="attendance-employee" required></select></div>
+                    <div class="form-group">
+                        <label for="attendance-status">Asistencia</label>
+                        <select id="attendance-status" required>
+                            <option value="present">Presente</option>
+                            <option value="absent">Ausente</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="extra-hours">Horas Extras</label><input type="number" id="extra-hours" min="0" step="0.5" value="0"></div>
+                    <button type="submit" class="btn btn-primary">Registrar Asistencia</button>
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Asistencias de la Semana</h3></div>
+                <div class="week-selector">
+                    <label for="attendance-week">Seleccionar semana:</label>
+                    <input type="week" id="attendance-week" value="2024-W01">
+                    <button class="btn btn-primary" id="load-attendance">Cargar</button>
+                </div>
+                <div class="attendance-table">
+                    <table>
+                        <thead><tr><th>Empleado</th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th><th>Total Días</th><th>Horas Extras</th></tr></thead>
+                        <tbody id="attendance-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cálculo -->
+        <div class="tab-content" id="calculation">
+            <h2>Cálculo de Distribución de Propinas</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Resumen de la Semana</h3>
+                    <button class="btn btn-success" id="calculate-tips">Calcular Distribución</button>
+                </div>
+                <div class="week-selector">
+                    <label for="calculation-week">Seleccionar semana:</label>
+                    <input type="week" id="calculation-week" value="2024-W01">
+                    <button class="btn btn-primary" id="load-calculation">Cargar</button>
+                </div>
+                <div class="summary-cards">
+                    <div class="summary-card"><h3>Total Propina Semanal</h3><p id="calc-total-tips">$0.00</p></div>
+                    <div class="summary-card"><h3>Días Totales Trabajados</h3><p id="calc-total-days">0</p></div>
+                    <div class="summary-card"><h3>Valor por Día</h3><p id="calc-value-per-day">$0.00</p></div>
+                    <div class="summary-card"><h3>Valor por Hora Extra</h3><p id="calc-value-per-extra">$0.00</p></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Resultados de Distribución</h3></div>
+                <div class="table-responsive">
+                    <table>
+                        <thead><tr><th>Empleado</th><th>Días Trabajados</th><th>Horas Extras</th><th>Propina Base</th><th>Propina H. Extras</th><th>Total</th></tr></thead>
+                        <tbody id="calculation-body"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Exportar Resultados</h3></div>
+                <p>Puede exportar los resultados para su revisión o impresión:</p>
+                <button class="btn btn-primary" id="export-pdf">Exportar a PDF</button>
+                <button class="btn btn-success" id="export-excel">Exportar a Excel</button>
+            </div>
+        </div>
+    </div>
+    <script src="pro.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Horas Laborales</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <h1>Control de Horas Laborales</h1>
+
+        <div class="form-section">
+            <h2>Nuevo Registro</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <div>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div>
+                    <label for="entrada">Hora de Entrada:</label>
+                    <input type="time" id="entrada" required>
+                </div>
+                <div>
+                    <label for="salida">Hora de Salida:</label>
+                    <input type="time" id="salida" required>
+                </div>
+                <div>
+                    <label for="sueldoBase">Sueldo Base ($):</label>
+                    <input type="number" id="sueldoBase" step="0.01" required value="383.3333333">
+                </div>
+                <div>
+                    <label for="tiempoJornada">Tiempo de Jornada:</label>
+                    <select id="tiempoJornada">
+                        <option value="11-20">11:00 - 20:00</option>
+                        <option value="16-01">16:00 - 01:00</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tipoJornada">Tipo de Jornada:</label>
+                    <select id="tipoJornada" disabled>
+                        <option value="8" selected>8 horas</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="descuentos">Descuentos ($):</label>
+                    <input type="number" id="descuentos" step="0.01" value="0">
+                </div>
+                <div>
+                    <label for="descripcion">descripcion ($):</label>
+                    <input type="text" id="descripcion"  value="">
+                </div>
+            </div>
+            <button onclick="agregarRegistro()">Agregar Registro</button>
+        </div>
+
+        <table id="tablaHoras">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Entrada</th>
+                    <th>Salida</th>
+                    <th>Tiempo de Jornada</th>
+                    <th>Horas Trabajadas</th>
+                    <th>Horas Extra</th>
+                    <th>Sueldo Base</th>
+                    <th>Pago Diario</th>
+                    <th>Descuentos</th>
+                    <th>Neto Diario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los registros se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <h2>Resumen</h2>
+            <p>Total Horas Normales: <span id="totalHorasNormales">0</span> horas</p>
+            <p>Total Horas Extra: <span id="totalHorasExtra">0</span> horas</p>
+            <p>Total Pagado: $<span id="totalPagado">0.00</span></p>
+            <p>Total Descuentos: $<span id="totalDescuentos">0.00</span></p>
+            <p>Neto Total: $<span id="netoTotal">0.00</span></p>
+        </div>
+
+        <div class="report-section">
+            <h2>Generar Reporte Semanal</h2>
+            <p>Semana actual: <span id="semanaActual"></span></p>
+            <label for="semanaSeleccionada">Semana del año:</label>
+            <input type="number" id="semanaSeleccionada" min="1" max="53">
+            <button onclick="generarReporteSemanalDesdeInput()">Generar Reporte</button>
+        </div>
+
+
+        <div class="debug-info">
+            <h3>Información de Depuración:</h3>
+            <p id="debugOutput"></p>
+        </div>
+    </div>
+
+    <script src="/scipt.js"></script>
+</body>
+
+</html>
