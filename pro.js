@@ -1,42 +1,13 @@
 // Datos de ejemplo para simular la aplicación
         const sampleData = {
             employees: [
-                { id: 1, name: "Juan Pérez", position: "Mesero", status: "active" },
-                { id: 2, name: "María López", position: "Cajero", status: "active" },
-                { id: 3, name: "Carlos Rodríguez", position: "Bartender", status: "active" },
-                { id: 4, name: "Ana García", position: "Mesero", status: "inactive" }
+                
             ],
             tips: [
-                { date: "2024-01-01", amount: 1200.00 },
-                { date: "2024-01-02", amount: 1500.50 },
-                { date: "2024-01-03", amount: 1800.75 },
-                { date: "2024-01-04", amount: 2000.00 },
-                { date: "2024-01-05", amount: 1700.25 },
-                { date: "2024-01-06", amount: 2100.00 },
-                { date: "2024-01-07", amount: 1900.50 }
+                
             ],
             attendance: [
-                { date: "2024-01-01", employeeId: 1, status: "present", extraHours: 2 },
-                { date: "2024-01-01", employeeId: 2, status: "present", extraHours: 0 },
-                { date: "2024-01-01", employeeId: 3, status: "present", extraHours: 1 },
-                { date: "2024-01-02", employeeId: 1, status: "present", extraHours: 0 },
-                { date: "2024-01-02", employeeId: 2, status: "present", extraHours: 1.5 },
-                { date: "2024-01-02", employeeId: 3, status: "absent", extraHours: 0 },
-                { date: "2024-01-03", employeeId: 1, status: "present", extraHours: 0 },
-                { date: "2024-01-03", employeeId: 2, status: "present", extraHours: 0 },
-                { date: "2024-01-03", employeeId: 3, status: "present", extraHours: 0 },
-                { date: "2024-01-04", employeeId: 1, status: "present", extraHours: 3 },
-                { date: "2024-01-04", employeeId: 2, status: "present", extraHours: 0 },
-                { date: "2024-01-04", employeeId: 3, status: "present", extraHours: 0 },
-                { date: "2024-01-05", employeeId: 1, status: "present", extraHours: 0 },
-                { date: "2024-01-05", employeeId: 2, status: "absent", extraHours: 0 },
-                { date: "2024-01-05", employeeId: 3, status: "present", extraHours: 2 },
-                { date: "2024-01-06", employeeId: 1, status: "present", extraHours: 0 },
-                { date: "2024-01-06", employeeId: 2, status: "present", extraHours: 0 },
-                { date: "2024-01-06", employeeId: 3, status: "present", extraHours: 0 },
-                { date: "2024-01-07", employeeId: 1, status: "present", extraHours: 1 },
-                { date: "2024-01-07", employeeId: 2, status: "present", extraHours: 0 },
-                { date: "2024-01-07", employeeId: 3, status: "present", extraHours: 0 }
+                
             ]
         };
 
